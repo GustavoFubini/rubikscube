@@ -1,26 +1,26 @@
 from math import sin, cos, pi
 import pygame
 
-def scalar_product(v,w):
+def scalar_product(vec0,vec1):
     value = 0
     for i in range(3):
-        value += v[i]*w[i]
+        value += vec0[i]*vec1[i]
     return(value)
 
-def scalar_vector_mult(number,v):
-    w = []
-    for i in range(len(v)):
-        w.append(number*v[i])
-    return(w)
+def scalar_vector_mult(num,vec):
+    result = []
+    for i in range(len(vec)):
+        result += [num*vec[i]]
+    return(result)
 
-def vector_addition(v,w):
+def vector_addition(vec0,vec1):
     vector = []
-    for i in range(len(v)):
-        vector.append(v[i]+w[i])
+    for i in range(len(vec0)):
+        vector.append(vec0[i]+vec1[i])
     return(vector)
 
-def projetion(normal_vector,plane_basis_1,plane_basis_2,w):
-    return([scalar_product(w,plane_basis_1),scalar_product(w,plane_basis_2)])
+def projetion(plane_base1,plane_base2,w):
+    return([scalar_product(w,plane_base1),scalar_product(w,plane_base2)])
 
 def visible_verticies(verticies,normal_vector):
     verticies_new = []
@@ -41,15 +41,15 @@ def initialise(phi,theta,r):
     return([normal_vector,basis1,basis2,verticies])
 
 def draw_line(surface,color,start,end,normal_vector,plane_basis_1,plane_basis_2,shift):
-    p_start = projetion(normal_vector,plane_basis_1,plane_basis_2,start)
-    p_end = projetion(normal_vector,plane_basis_1,plane_basis_2,end)
+    p_start = projetion(plane_basis_1,plane_basis_2,start)
+    p_end = projetion(plane_basis_1,plane_basis_2,end)
     pygame.draw.line(surface,color,vector_addition(p_start,shift),vector_addition(p_end,shift))
 
 def draw_polygon(surface,color,vertex1,vertex2,vertex3,vertex4,normal_vector,plane_basis_1,plane_basis_2,shift):
-    p_vertex1 = projetion(normal_vector,plane_basis_1,plane_basis_2,vertex1)
-    p_vertex2 = projetion(normal_vector,plane_basis_1,plane_basis_2,vertex2)
-    p_vertex3 = projetion(normal_vector,plane_basis_1,plane_basis_2,vertex3)
-    p_vertex4 = projetion(normal_vector,plane_basis_1,plane_basis_2,vertex4)
+    p_vertex1 = projetion(plane_basis_1,plane_basis_2,vertex1)
+    p_vertex2 = projetion(plane_basis_1,plane_basis_2,vertex2)
+    p_vertex3 = projetion(plane_basis_1,plane_basis_2,vertex3)
+    p_vertex4 = projetion(plane_basis_1,plane_basis_2,vertex4)
     pygame.draw.polygon(surface,color, [vector_addition(p_vertex1,shift),vector_addition(p_vertex2,shift),vector_addition(p_vertex3,shift),vector_addition(p_vertex4,shift)])
 
 def flat_Cube(surface,cube,x,y):
