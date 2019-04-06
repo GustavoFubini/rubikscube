@@ -14,24 +14,15 @@ def scalar_vector_mult(num,vec):
     return(result)
 
 def vector_addition(vec0,vec1):
-    vector = []
-    for i in range(len(vec0)):
-        vector.append(vec0[i]+vec1[i])
-    return(vector)
+    return([vec0[i] + vec1[i] for i in range(len(vec0))])
 
-def projetion(plane_base1,plane_base2,w):
-    return([scalar_product(w,plane_base1),scalar_product(w,plane_base2)])
+def projetion(plane_base1,plane_base2,vec):
+    return([scalar_product(vec,plane_base1),scalar_product(vec,plane_base2)])
 
-def visible_verticies(verticies,normal_vector):
-    verticies_new = []
-    minimum  = scalar_product(verticies[0],normal_vector)
-    for vertex in verticies:
-        if minimum > scalar_product(vertex,normal_vector):
-            minimum = scalar_product(vertex,normal_vector)
-    for vertex in verticies:
-        if 0.999*minimum < scalar_product(vertex,normal_vector):
-            verticies_new.append(vertex)
-    return(verticies_new)
+def visible_verticies(verticies,normvec):
+    prods = [scalar_product(vertex,normvec) for vertex in verticies]
+    minimum = min(prods)
+    return([vertex for vertex in verticies if scalar_product(vertex,normvec) > minimum])
 
 def initialise(phi,theta,r):
     normal_vector = [cos(phi)*cos(theta),sin(phi)*cos(theta),sin(theta)]

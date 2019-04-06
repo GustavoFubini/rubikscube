@@ -14,11 +14,17 @@ theta = pi/4
 
 pygame.init()
 surface = pygame.display.set_mode((750,750))
+clock = pygame.time.Clock()
 draw_rubikscube(surface,cube_radius,phi,-theta,[250,250],size,cube,lines)
 pygame.display.flip()
 
+last_move = 'f'
 run = True
 while run:
+    clock.tick(0.5)
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            run = False
     move = input()
     if not(move in ['r','l','u','d','f','b']):
         move = last_move
@@ -38,3 +44,4 @@ while run:
     pygame.display.flip()
     last_move = move
     move = ''
+pygame.quit()
