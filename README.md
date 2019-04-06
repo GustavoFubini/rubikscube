@@ -1,2 +1,1 @@
-# rubikscube
-hail satan
+oooooooooof
