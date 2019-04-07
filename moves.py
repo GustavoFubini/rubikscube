@@ -12,18 +12,9 @@ colors = [white,red,green,blue,orange,yellow]
 def reverse(liste):
     return(liste[::-1])
 
+# 0 -> top, 5 -> bottom, 1 -> rigth, 4 -> left, 2 -> front, 3 -> back
 def cube(size):
-    cube = []
-    # 0 -> top, 5 -> bottom, 1 -> rigth, 4 -> left, 2 -> front, 3 -> back
-    for i in range(6):
-        plane = []
-        for j in range(size):
-            row = []
-            for k in range(size):
-                row.append(colors[i])
-            plane.append(row)
-        cube.append(plane)
-    return(cube)
+    return([[[color for i in range(size)]for j in range(size)]for color in colors])
 
 def rotation_right(cube,plane_num,size):
     #only the plane rotated is being changed
