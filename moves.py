@@ -1,6 +1,5 @@
 import pygame
 from darstellung import *
-from moves import *
 
 white = (255,255,255)
 red = (255,0,0)
@@ -11,14 +10,11 @@ yellow = (255,255,0)
 colors = [white,red,green,blue,orange,yellow]
 
 def reverse(liste):
-    list_n = []
-    for i in range(len(liste)):
-        list_n.append(liste[len(liste)-1-i])
-    return(list_n)
+    return(liste[::-1])
 
 def cube(size):
     cube = []
-    #0 is top,5 is bottom,1 is rigth,4 is left,2 is front,3 is back
+    # 0 -> top, 5 -> bottom, 1 -> rigth, 4 -> left, 2 -> front, 3 -> back
     for i in range(6):
         plane = []
         for j in range(size):
@@ -55,7 +51,7 @@ def front(cube,distance,size):
         rotation_right(cube,2,size)
     for i in range(size):
         cube[0][size-1-distance][i],cube[1][i][distance],cube[5][distance][size-1-i],cube[4][size-1-i][size-1-distance] = cube[4][size-1-i][size-1-distance],cube[0][size-1-distance][i],cube[1][i][distance],cube[5][distance][size-1-i]
- 
+
 def back(cube,distance,size):
     if distance == 0:
         rotation_right(cube,3,size)
